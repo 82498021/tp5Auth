@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="CSS/pintuer.css">
+    <link rel="stylesheet" href="CSS/admin.css">
+    <script src="JS/jquery.js"></script>
+    <script src="JS/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="">
+            <div class="form-group">
+                <div class="label">
+                    <label>手机号：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="<{$data->phone}>" disabled name="phone" data-validate="required:请输入账号" data-v/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>昵称：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="<{$data->nick_name}>" name="nick_name" data-validate="required:请输入昵称"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>密码：</label>
+                </div>
+                <div class="field">
+                    <input type="password" class="input w50" value="" name="password" placeholder="留空则不修改密码"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>权限：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    <?php foreach($list as $val):?>
+                    <input name="roles[]" type="checkbox" value="<{$val->id}>" <?php if(in_array($val->id,$roles)):?>checked<?php endif;?>>  <{$val->title}>
+                    <?php endforeach;?>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>状态：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    正常 <input name="status" type="radio" value="1" <?php if($data->status==1):?> checked<?php endif;?>/>
+                    禁用 <input name="status" type="radio" value="2" <?php if($data->status!=1):?> checked<?php endif;?>/>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <input type="hidden" name="id" value="<?=$val->id?>">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    <button type="button" class="button border-green" id="checkall" onclick="javascript:history.go(-1);tt(this.style.display='none')"> 返回 </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

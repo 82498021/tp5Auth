@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="CSS/pintuer.css">
+    <link rel="stylesheet" href="CSS/admin.css">
+    <script src="JS/jquery.js"></script>
+    <script src="JS/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 节点管理</strong></div>
+        <div class="padding border-bottom">
+            <ul class="search">
+                <li>
+                    <a href="<{:url('admin/node/add')}>" class="button border-yellow"><span class="icon-plus-square-o"></span> 新增</a>
+                </li>
+            </ul>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="120">ID</th>
+                <th>名称</th>
+                <th>Moudle</th>
+                <th>Controller</th>
+                <th>Action</th>
+                <th>路由</th>
+                <th>验证</th>
+                <th>排序</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <?php foreach($list as $val):?>
+            <tr>
+                <td><{$val->id}></td>
+                <td><{$val->title}></td>
+                <td><{$val->module}></td>
+                <td><{$val->controller}></td>
+                <td><{$val->action}></td>
+                <td><{$val->route}></td>
+                <td><{$val->check==1?'是':'否'}></td>
+                <td><{$val->sort}></td>
+                <td><{$val->status==1?'正常':'禁用'}></td>
+                <td>
+                    <div class="button-group"><a class="button border-yellow" href="<{:url('admin/node/add',['pid'=>$val->id])}>"><span class="icon-plus-square-o"></span> 新增</a></div>
+                    <div class="button-group"><a class="button border-blue" href="<{:url('admin/node/update',['id'=>$val->id])}>"><span class="icon-edit"></span> 更新</a></div>
+                    <div class="button-group"><a class="button border-red" href="<{:url('admin/node/delete',['id'=>$val->id])}>"><span class="icon-trash-o"></span> 删除</a></div>
+                </td>
+            </tr>
+            <?php endforeach;?>
+        </table>
+
+    </div>
+
+    <{$list->render();}>
+</body>
+</html>
